@@ -1,28 +1,38 @@
-<div class="min-h-dvh flex justify-center ">
-  <div class="flex w-full max-w-[1600px]">
-    <!-- Sidebar -->
+<div class="min-h-dvh flex justify-center">
+  <div class="relative w-full max-w-[1600px] mx-auto flex">
     <aside
-      class="w-64 shrink-0 px-4 pt-10 pb-2 hidden md:flex md:flex-col bg-primary justify-between "
+      class="absolute overflow-auto max-h-dvh flex flex-col justify-between left-0 top-0 h-full w-72 z-50 transform transition-transform duration-300 ease-in-out bg-primary px-2 pt-10 pb-2 md:static md:h-auto md:transform-none md:z-auto"
+      [ngClass]="sidebarOpen() ? 'translate-x-0' : '-translate-x-full md:translate-x-0'"
     >
       <div class="flex flex-col items-center">
-        <div class="w-30 h-30 bg-white rounded-full"></div>
+        <div class="w-[120px] h-[120px] bg-white rounded-full"></div>
+
         <div class="flex items-center gap-2 relative">
           <h2 class="font-semibold text-white text-xl mt-2">ธรรมรัตน์ มนตรี</h2>
-          <!-- <mat-icon style="color: #257fe6" class="absolute -right-7">check_circle</mat-icon> -->
         </div>
+
         <span class="text-sm text-text-soft">@tammaratpleum99</span>
-        <nav class="px-2 py-2 space-y-1 border-t border-second-soft mt-4 w-full items-start">
-          @for(item of menuList; track item.name){
+
+        <nav class="px-2 py-2 space-y-1 border-t border-second-soft mt-4 w-full">
+          @for (item of menuList; track item.name) {
           <a
-            routerLink="{{ item.path }}"
+            [routerLink]="item.path"
             routerLinkActive="bg-second-soft"
-            class="flex items-center gap-2 rounded px-3 py-2 hover:bg-second duration-300"
+            #rla="routerLinkActive"
+            class="flex items-center justify-between rounded px-3 py-2 hover:bg-second duration-300"
           >
-            <mat-icon>{{ item.icon }}</mat-icon>
-            <span>{{ item.name }}</span>
+            <div class="flex gap-2 items-center">
+              <i [ngClass]="item.icon"></i>
+              <span>{{ item.name }}</span>
+            </div>
+            @if (rla.isActive) {<i class="pi pi-arrow-right text-xs"></i>}
           </a>
           }
         </nav>
+      </div>
+
+      <div class="bg-blue-500/30 border-blue-500 border-2 rounded-md p-4 backdrop-blur-2xl">
+        SignInBox
       </div>
 
       <nav class="flex flex-col pt-4 items-center space-y-1 border-t border-second-soft mt-4">
@@ -31,50 +41,36 @@
       </nav>
     </aside>
 
+    <!-- Backdrop: แสดงเฉพาะตอน mobile/tablet เล็ก และเมื่อ sidebar เปิด -->
+    @if (sidebarOpen()) {
+    <div
+      class="absolute inset-0 bg-black/70 backdrop-blur-xs z-40 md:hidden duration-300"
+      (click)="toggleSidebar()"
+    ></div>
+    }
     <!-- Content -->
-    <main class="flex-1 bg-blue-100 p-6">Content</main>
-  </div>
-  <!-- Sidebar -->
-  <!-- <aside
-    class="w-64 shrink-0 border-r bg-white hidden md:block"
-    [ngClass]="{ block: sidebarOpen(), 'hidden md:block': !sidebarOpen() }"
-  >
-    <div class="flex flex-col items-center bg-red-500">
-      <div class="w-10 h-10">2</div>
-    </div>
-    <nav class="px-2 py-2 space-y-1">
-      <a
-        routerLink="/home"
-        routerLinkActive="bg-gray-100"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="block rounded px-3 py-2 hover:bg-gray-50 bg-second"
-        >Home</a
-      >
-      <a
-        routerLink="/about"
-        routerLinkActive="bg-gray-100"
-        class="block rounded px-3 py-2 hover:bg-gray-50"
-        >About</a
-      >
-      <a
-        routerLink="/project"
-        routerLinkActive="bg-gray-100"
-        class="block rounded px-3 py-2 hover:bg-gray-50"
-        >Project</a
-      >
-    </nav>
-  </aside> -->
-
-  <!-- Main -->
-  <!-- <div class="flex-1 flex flex-col">
-    <header class="h-14 border-b flex items-center gap-2 px-4">
-      <button class="md:hidden rounded p-2 border" (click)="toggleSidebar()">☰</button>
-      <h1 class="font-medium">Dashboard สวัสดีครับพี่ชาย</h1>
-      <div class="ml-auto text-sm text-gray-500">Signed in as you</div>
-    </header>
-
-    <main class="p-4">
-      <router-outlet></router-outlet>
+    <main class="flex flex-col w-full">
+      <div class="bg-primary flex flex-col p-4 gap-1 border-b border-second-soft">
+        <div class="flex gap-2 items-center">
+          <button
+            (click)="toggleSidebar()"
+            class="z-60 md:hidden flex items-center justify-center border p-2 rounded-md bg-primary border-text-soft cursor-pointer"
+          >
+            <i class="pi pi-bars text-text-soft"></i>
+          </button>
+          <h2 class="text-2xl font-semibold text-white">หน้าแรก</h2>
+        </div>
+        <span class="text-xs text-text-soft"
+          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio nesciunt maxime
+          recusandae illo temporibus labore veniam vero consectetur, accusantium modi unde minus
+          sequi aut! Consequatur iste animi provident laudantium quo.</span
+        >
+      </div>
+      <div class="p-4">
+        <router-outlet />
+      </div>
     </main>
-  </div> -->
+  </div>
 </div>
+
+<!-- [routerLinkActiveOptions]="{ exact: true }" -->

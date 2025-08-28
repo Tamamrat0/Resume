@@ -1,25 +1,28 @@
-import { NgClass, CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import { NgClass, CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-
-import { MatIconModule } from '@angular/material/icon';
 
 export interface MenuItem {
   name: string;
   icon: string;
   path: string;
+  desc?: string;
 }
 @Component({
   selector: 'app-shell',
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, NgClass, MatIconModule],
+  standalone: true,
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, NgClass],
   templateUrl: './shell.html',
 })
 export class Shell {
   menuList: MenuItem[] = [
-    { name: 'หน้าแรก', icon: 'home', path: '/home' },
-    { name: 'เกี่ยวกับ', icon: 'person', path: '/about' },
-    { name: 'รางวัล', icon: 'work', path: '/project' },
-    { name: 'ผลงาน', icon: 'work', path: '/project' },
+    { name: 'หน้าแรก', icon: 'pi pi-home', path: '/home', desc: 'สรุปภาพรวมทั้งหมด' },
+    { name: 'เกี่ยวกับ', icon: 'pi pi-user', path: '/about', desc: 'แนะนำตัวและประวัติ' },
+    { name: 'รางวัล', icon: 'pi pi-star', path: '/mywork', desc: 'ผลงานที่คัดมา' },
+    { name: 'ผลงาน', icon: 'pi pi-file', path: '/project', desc: 'โปรเจกต์ที่คัดมา' },
+    { name: 'ผลงาน', icon: 'pi pi-file', path: '/project', desc: 'โปรเจกต์ที่คัดมา' },
+    { name: 'ผลงาน', icon: 'pi pi-file', path: '/project', desc: 'โปรเจกต์ที่คัดมา' },
+    { name: 'ผลงาน', icon: 'pi pi-file', path: '/project', desc: 'โปรเจกต์ที่คัดมา' },
   ];
   sidebarOpen = signal(false);
 
