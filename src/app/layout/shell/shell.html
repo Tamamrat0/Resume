@@ -1,13 +1,47 @@
-<div class="min-h-dvh flex">
+<div class="min-h-dvh flex justify-center ">
+  <div class="flex w-full max-w-[1600px]">
+    <!-- Sidebar -->
+    <aside
+      class="w-64 shrink-0 px-4 pt-10 pb-2 hidden md:flex md:flex-col bg-primary justify-between "
+    >
+      <div class="flex flex-col items-center">
+        <div class="w-30 h-30 bg-white rounded-full"></div>
+        <div class="flex items-center gap-2 relative">
+          <h2 class="font-semibold text-white text-xl mt-2">ธรรมรัตน์ มนตรี</h2>
+          <!-- <mat-icon style="color: #257fe6" class="absolute -right-7">check_circle</mat-icon> -->
+        </div>
+        <span class="text-sm text-text-soft">@tammaratpleum99</span>
+        <nav class="px-2 py-2 space-y-1 border-t border-second-soft mt-4 w-full items-start">
+          @for(item of menuList; track item.name){
+          <a
+            routerLink="{{ item.path }}"
+            routerLinkActive="bg-second-soft"
+            class="flex items-center gap-2 rounded px-3 py-2 hover:bg-second duration-300"
+          >
+            <mat-icon>{{ item.icon }}</mat-icon>
+            <span>{{ item.name }}</span>
+          </a>
+          }
+        </nav>
+      </div>
+
+      <nav class="flex flex-col pt-4 items-center space-y-1 border-t border-second-soft mt-4">
+        <span class="text-xs">COPYRIGHT © 2025 </span>
+        <span class="text-xs">Tammarat Montree. All Rights Reserved </span>
+      </nav>
+    </aside>
+
+    <!-- Content -->
+    <main class="flex-1 bg-blue-100 p-6">Content</main>
+  </div>
   <!-- Sidebar -->
-  <aside
+  <!-- <aside
     class="w-64 shrink-0 border-r bg-white hidden md:block"
     [ngClass]="{ block: sidebarOpen(), 'hidden md:block': !sidebarOpen() }"
   >
     <div class="flex flex-col items-center bg-red-500">
       <div class="w-10 h-10">2</div>
     </div>
-    <!-- <div class="p-4 font-semibold">My App</div> -->
     <nav class="px-2 py-2 space-y-1">
       <a
         routerLink="/home"
@@ -29,20 +63,18 @@
         >Project</a
       >
     </nav>
-  </aside>
+  </aside> -->
 
   <!-- Main -->
-  <div class="flex-1 flex flex-col">
-    <!-- Topbar -->
+  <!-- <div class="flex-1 flex flex-col">
     <header class="h-14 border-b flex items-center gap-2 px-4">
       <button class="md:hidden rounded p-2 border" (click)="toggleSidebar()">☰</button>
       <h1 class="font-medium">Dashboard สวัสดีครับพี่ชาย</h1>
       <div class="ml-auto text-sm text-gray-500">Signed in as you</div>
     </header>
 
-    <!-- Page content -->
     <main class="p-4">
       <router-outlet></router-outlet>
     </main>
-  </div>
+  </div> -->
 </div>
